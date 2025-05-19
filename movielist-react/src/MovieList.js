@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 import Movie from './Movie';
+import './index.css';
 // skapa html koden
 export default function MovieList() {
 
@@ -43,6 +44,16 @@ export default function MovieList() {
         setMovies(movies.filter((item) =>item.id !== id));
     }
 
+    function sortAlphabeticly() {
+        const sort = [...movies].sort((a,b) => a.title.localeCompare(b.title));
+        setMovies(sort);
+    }
+
+    function ratingSort() {
+        const sortRating = [...movies].sort((a,b) => b.rating - a.rating);
+        setMovies(sortRating);
+    }
+
 
     return (
         <div>
@@ -65,6 +76,9 @@ export default function MovieList() {
             <ul className='list-group'>
                 {movies.map(movie => <Movie key={movies.id} item ={movie} deleteMovie = {deleteMovie} />)}
             </ul>
+            <hr/>
+            <button id ="sortByAlphabet" className=" btn btn-primary" onClick={sortAlphabeticly}>Sortera i bokstavsordning</button>
+            <button id ="sortByRating" className=" btn btn-primary" onClick={ratingSort}>Sortera baserat på betyg</button>
 
         </div>
     )
