@@ -1,3 +1,4 @@
+import MovieList from "./MovieList";
 
 function App() {
   return (
@@ -5,6 +6,7 @@ function App() {
       <h1>MovieList</h1>
       <h2>Lägg till en film</h2>
       <hr></hr>
+      <MovieList />
     </div>
   );
 }
