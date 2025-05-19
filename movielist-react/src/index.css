@@ -1,0 +1,21 @@
+.movie-item {
+    list-style: none;
+    background-color: #eee;
+    margin: 5px;
+    padding: 20px;
+    box-shadow: 0 0 5px #999;
+    overflow: hidden;
+}
+
+.star-icon {
+    height: 20px;
+    margin-left: 5px;
+    float: right;
+}
+
+.delete-movie-icon{
+    float: right;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}

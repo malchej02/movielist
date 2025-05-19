@@ -6,26 +6,36 @@ export default function MovieList() {
     const [movies, setMovies] = useState([{
 
         id: 1,
-        title: "movie 1"
-
+        title: "Star Wars",
+        rating: 5
     }]);
+
+    const titleRef = useRef();
+    const ratingRef = useRef()
     
     function addNewMovie(){
-    const input = document.querySelector("input");
-    const getTitle = input.value.trim();
+        const getTitle = titleRef.current.value.trim();
+        const getRating = ratingRef.current.value;
 
-    if (getTitle === "") {
-        alert ("Du måste skriva in en titel");
-        return;      
-    };
+        if (getTitle === "") {
+            alert ("Du måste skriva in en titel");
+            return;      
+        };
 
-    const newMovie = { 
-        id: movies.length + 1,
-        title: getTitle
-    };
+        if (getRating === "") {
+            alert ("Du måste välja en rating");
+            return;
+        }
 
-    setMovies([...movies, newMovie]);
-    input.value = "";
+        const newMovie = { 
+            id: movies.length + 1,
+            title: getTitle,
+            rating: parseInt(getRating),
+        };
+
+        setMovies([...movies, newMovie]);
+        titleRef.current.value = "";
+        ratingRef.current.value = "";
 
     }
 
@@ -36,17 +46,15 @@ export default function MovieList() {
 
     return (
         <div>
-            <legend><strong>Titel:</strong></legend>
-            <input className="form-control" placeholder='Titel här...'/>
+            <label><strong>Titel:</strong></label>
+            <input ref={titleRef} className="form-control" placeholder='Titel här...'/>
             <br />
-            <legend><strong>Betyg :</strong></legend>
-            <select id='betyg' className = "form-control">
-            <option value = "">Betyg:</option>
-            <option value = "1">1</option>
-            <option value = "2">2</option>
-            <option value = "3">3</option>
-            <option value = "4">4</option>
-            <option value = "5">5</option>
+            <label><strong>Betyg:</strong></label>
+            <select ref={ratingRef} className = "form-control">
+                <option value="">Välj betyg här...</option>
+                {[1, 2, 3, 4, 5].map(num => (
+                    <option key={num} value={num}>{num}</option>
+                ))}
             </select>
             <br/>
             <button id="addBtn" className="btn btn-success" onClick={addNewMovie}>Lägg till</button>
